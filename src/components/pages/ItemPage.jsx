@@ -56,5 +56,3 @@ export default function ItemPage({ items }) {
     </>
   );
 }
-
-// <FormItem onSubmit={handleAddItem} />
