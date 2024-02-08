@@ -4,9 +4,8 @@ import MainPage from './pages/MainPage';
 
 const components = {
   MainPage,
-  SignUpPage,
   IndexPage,
-
+  SignUpPage,
 };
 
 export default components;
