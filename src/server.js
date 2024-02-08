@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
@@ -7,6 +8,9 @@ import jsxRender from './utils/jsxRender';
 import apiItemRouter from './routes/apiItemRouter';
 import itemRouter from './routes/itemRouter';
 import resLocals from './middlewares/resLocals';
+import apiSignRouter from './routes/apiSignRouter';
+import indexRouter from './routes/indexRouter';
+import apiSignInRouter from './routes/apiSignInRouter';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -24,5 +28,8 @@ app.use(resLocals);
 
 app.use('/items', itemRouter);
 app.use('/api/items', apiItemRouter);
+app.use('/', indexRouter);
+app.use('/', apiSignRouter);
+app.use('/', apiSignInRouter);
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
