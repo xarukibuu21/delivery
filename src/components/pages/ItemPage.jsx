@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import FormItem from '../ui/FormItem';
 import useItems from '../../hooks/useItems';
-import AllFormItem from '../ui/AllFormItem';
-// import AllFormItem from '../ui/AllFormItem';
 
 export default function ItemPage({ items }) {
-  console.log('33333333333', items, '333333333333');
   const { itemsState, setItemsState, handleAddItem } = useItems(items);
-  console.log('44444444', itemsState, '44444444');
 
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:3000/api/items/${id}`, {

@@ -15,7 +15,6 @@ router
   });
 
 router.post('/', async (req, res) => {
-  console.log('222222222req', req.body, '222222222req');
   const {
     title, img, address, price, sale,
   } = req.body;
