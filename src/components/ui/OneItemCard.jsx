@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Col } from 'react-bootstrap/';
 
 export default function OneItemCard({ item }) {
@@ -24,7 +24,6 @@ export default function OneItemCard({ item }) {
           <button type="button" className="btn btn-success">купиц</button>
         </Card.Footer>
       </Card>
-      
     </Col>
   );
 }
