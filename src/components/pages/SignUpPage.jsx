@@ -1,10 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
-
-export default function SignUpPage() {
+function SignUpPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,69 +11,70 @@ export default function SignUpPage() {
     isDeliver: false,
   });
 
-  const handleChange = (event) => setFormData(
-    { ...formData, [event.target.name]: event.target.value },
-  );
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log(formData);
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (formData.name !== '' || formData.email !== '' || formData.password !== '' || formData.phone !== '' || formData.address !== '') {
-      alert('Неверные данные');
-      return;
-    }
-    const response = await axios.post('/api/auth/signup', formData);
-    if (response.status === 200) {
-      window.location.href = '/';
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/signup', formData);
+      console.log('Пользователь зарегистрирован', response.data);
+    } catch (error) {
+      console.error('Ошибка при регистрации', error);
     }
   };
 
   return (
-    <>
-      <h1>Форма регистрации</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Имя</Form.Label>
-          <Form.Control value={formData.name} onChange={handleChange} type="text" name="name" placeholder="Enter name" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control value={formData.email} onChange={handleChange} type="text" name="email" placeholder="Enter email" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Пароль</Form.Label>
-          <Form.Control value={formData.password} onChange={handleChange} type="password" name="password" placeholder="Enter password" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Телефон</Form.Label>
-          <Form.Control value={formData.phone} onChange={handleChange} type="text" name="phone" placeholder="Enter phone" />
-        </Form.Group>
-
-        <div className="form-check">
-          <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
+    <div className="container">
+      <h1 className="mb-4">Регистрация</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <input type="text" className="form-control" name="name" value={formData.name} onChange={handleChange} placeholder="Имя" />
+        </div>
+        <div className="mb-3">
+          <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+        </div>
+        <div className="mb-3">
+          <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} placeholder="Пароль" />
+        </div>
+        <div className="mb-3">
+          <input type="text" className="form-control" name="phone" value={formData.phone} onChange={handleChange} placeholder="Телефон" />
+        </div>
+        <div className="mb-3">
+          <input type="text" className="form-control" name="address" value={formData.address} onChange={handleChange} placeholder="Адрес" />
+        </div>
+        <div className="mb-3">
+          <div>Выберите:</div>
+          <label>
+            <input
+              type="radio"
+              name="isDeliver"
+              checked="checked"
+              value="false"
+              onChange={handleChange}
+            />
             Пользователь
           </label>
-        </div>
-        <div className="form-check">
-          <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-          <label className="form-check-label" htmlFor="flexRadioDefault2">
+          <label>
+            <input
+              type="radio"
+              name="isDeliver"
+              value="true"
+              onChange={handleChange}
+            />
             Курьер
           </label>
         </div>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Адрес</Form.Label>
-          <Form.Control value={formData.address} onChange={handleChange} type="text" name="address" placeholder="Enter address" />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Регистрация
-        </Button>
-
-      </Form>
-    </>
+        <button type="submit" className="btn btn-primary">Зарегистрироваться</button>
+      </form>
+    </div>
   );
 }
+
+export default SignUpPage;

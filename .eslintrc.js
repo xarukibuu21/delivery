@@ -23,5 +23,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'import/no-extraneous-dependencies': 'off',
+    'react/prop-types': 'off',
+    'no-console': 'off',
   },
 };
