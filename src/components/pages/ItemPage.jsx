@@ -20,7 +20,7 @@ export default function ItemPage({ items }) {
 
   return (
     <>
-      <h1>ItemPage</h1>
+      <h1>Добавьте заказ</h1>
       <FormItem onSubmit={handleAddItem} inputs={itemsState} setInputs={setItemsState} />
       <ul>
         {itemsState.map((el) => (
