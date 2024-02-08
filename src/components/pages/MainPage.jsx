@@ -7,8 +7,8 @@ export default function MainPage({ items }) {
   return (
     <>
       <ButtonGroup aria-label="Basic example" style={{ textAlign: 'right', marginTop: '10px' }}>
-        <Button variant="secondary" href="login">Вход</Button>
-        <Button variant="secondary" href="registration">Регистрация</Button>
+        <Button variant="secondary" href="signin">Вход</Button>
+        <Button variant="secondary" href="signup">Регистрация</Button>
       </ButtonGroup>
 
       <Row mt={3}>
