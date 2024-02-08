@@ -1,5 +1,6 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 export default function App({ children }) {
-  return <div>{children}</div>;
+  return <Container>{children}</Container>;
 }
