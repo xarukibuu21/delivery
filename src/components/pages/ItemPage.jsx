@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import FormItem from '../ui/FormItem';
 import useItems from '../../hooks/useItems';
@@ -72,12 +73,10 @@ export default function ItemPage({ items }) {
   return (
     <div className="container mt-4">
       {' '}
-      {/* Используйте класс Bootstrap mt-4 для создания отступа сверху */}
       <h1>Добавьте заказ</h1>
       <FormItem onSubmit={handleAddItem} inputs={itemsState} setInputs={setItemsState} />
       <div className="row mt-4">
         {' '}
-        {/* Используйте класс Bootstrap mt-4 для создания отступа между рядами */}
         <div className="col-md-12">
           {itemsState.map((el) => (
             <div key={el.id} className="card mb-3">
@@ -87,10 +86,10 @@ export default function ItemPage({ items }) {
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title">{el.title}</h5>
-                    <p className="card-text">{el.address}</p>
-                    <p className="card-text">{el.price}</p>
-                    <p className="card-text">{el.sale}</p>
+                    <h5 className="card-title">{`Позиция: ${el.title}`}</h5>
+                    <p className="card-text">{`Адрес: ${el.address}`}</p>
+                    <p className="card-text">{`Цена: ${el.price}р.`}</p>
+                    <p className="card-text">{`Размер скидки: ${el.sale}%`}</p>
                     <button className="btn btn-danger" onClick={() => handleDelete(el.id)}>Delete</button>
                   </div>
                 </div>
