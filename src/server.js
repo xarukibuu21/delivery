@@ -1,9 +1,12 @@
+/* eslint-disable import/no-named-as-default */
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import jsxRender from './utils/jsxRender';
+import apiItemRouter from './routes/apiItemRouter';
+import itemRouter from './routes/itemRouter';
 import resLocals from './middlewares/resLocals';
 import apiSignRouter from './routes/apiSignRouter';
 import indexRouter from './routes/indexRouter';
@@ -23,6 +26,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(resLocals);
 
+app.use('/items', itemRouter);
+app.use('/api/items', apiItemRouter);
 app.use('/', indexRouter);
 app.use('/', apiSignRouter);
 app.use('/', apiSignInRouter);
