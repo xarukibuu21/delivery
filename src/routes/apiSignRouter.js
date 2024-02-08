@@ -1,5 +1,7 @@
 import express from 'express';
 import { User } from '../../db/models';
+import generateTokens from '../utils/generateTokens';
+import cookiesConfig from '../config/cookiesConfig';
 
 const apiSignRouter = express.Router();
 
@@ -26,7 +28,20 @@ apiSignRouter.post('/signup', async (req, res) => {
       isDeliver,
     });
 
-    res.status(201).json(newUser);
+    const user = {
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      phone: newUser.phone,
+      address: newUser.address,
+    };
+
+    const { accessToken, refreshToken } = generateTokens({ user });
+    res
+      .cookie('accessToken', accessToken, cookiesConfig.access)
+      .cookie('refreshToken', refreshToken, cookiesConfig.refresh)
+      .json({ user });
   } catch (error) {
     console.error(error);
     res.status(500).send('Ошибка сервера');

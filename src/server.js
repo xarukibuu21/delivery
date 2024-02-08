@@ -6,6 +6,7 @@ import 'dotenv/config';
 import jsxRender from './utils/jsxRender';
 import resLocals from './middlewares/resLocals';
 import apiSignRouter from './routes/apiSignRouter';
+import apiSignInRouter from './routes/apiSignInRouter';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -22,5 +23,6 @@ app.use(cookieParser());
 app.use(resLocals);
 
 app.use('/', apiSignRouter);
+app.use('/', apiSignInRouter);
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
