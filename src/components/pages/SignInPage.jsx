@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function SignInPage() {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     password: '',
   });
 
@@ -19,7 +19,9 @@ function SignInPage() {
     e.preventDefault();
     try {
       const response = await axios.post('/signin', formData);
-      console.log('Успешный вход: ', response.data);
+      if (response.status === 200) {
+        window.location.href = '/';
+      }
     } catch (error) {
       console.error('Ошибка при входе: ', error);
     }
@@ -30,7 +32,7 @@ function SignInPage() {
       <h2>Вход</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <input type="text" className="form-control" name="username" value={formData.username} onChange={handleChange} placeholder="Имя пользователя" />
+          <input type="text" className="form-control" name="name" value={formData.username} onChange={handleChange} placeholder="Имя пользователя" />
         </div>
         <div className="mb-3">
           <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} placeholder="Пароль" />
