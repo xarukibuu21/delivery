@@ -23,7 +23,9 @@ function SignUpPage() {
     e.preventDefault();
     try {
       const response = await axios.post('/signup', formData);
-      console.log('Пользователь зарегистрирован', response.data);
+      if (response.status === 200) {
+        window.location.href = '/';
+      }
     } catch (error) {
       console.error('Ошибка при регистрации', error);
     }
