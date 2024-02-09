@@ -6,13 +6,12 @@ import ModalWindow from '../ui/modal';
 
 export default function MainPage({ items }) {
   const [show, setShow] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState()
-
+  const [currentIndex, setCurrentIndex] = useState();
 
   const handleShow = (index) => {
     setShow(true);
-    setCurrentIndex(index)
-  }
+    setCurrentIndex(index);
+  };
 
   console.log(items);
   return (
@@ -28,9 +27,7 @@ export default function MainPage({ items }) {
 
       <Row mt={12}>
         {items.map((item, index) => (
-          <>
-            <OneItemCard key={item.id} item={item} handleShow={() => handleShow(index)} />
-          </>
+          <OneItemCard key={item.id} item={item} handleShow={() => handleShow(index)} />
         ))}
         { show && <ModalWindow show={show} setShow={setShow} item={items[currentIndex]} />}
       </Row>
