@@ -3,6 +3,7 @@ import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import MainPage from './pages/MainPage';
 import Protection from './pages/Protection';
+import ItemOrderPage from './pages/ItemOrderPage';
 
 const components = {
   MainPage,
@@ -10,6 +11,7 @@ const components = {
   SignInPage,
   ItemPage,
   Protection,
+  ItemOrderPage,
 };
 
 export default components;

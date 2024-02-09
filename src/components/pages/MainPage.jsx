@@ -9,7 +9,7 @@ export default function MainPage({ items, user }) {
   const [show, setShow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState();
 
-  const handleShow = () => {
+  const handleShow = (index) => {
     setShow(true);
     setCurrentIndex(index);
   };
@@ -17,19 +17,20 @@ export default function MainPage({ items, user }) {
   console.log(items);
   return (
     <>
-      <Navbar user={user} />
-      <Row mt={3}>
+      <ButtonGroup aria-label="Basic example" style={{ textAlign: 'right', marginTop: '10px' }}>
+        <Button variant="secondary" href="signin">
+          Вход
+        </Button>
+        <Button variant="secondary" href="signup">
+          Регистрация
+        </Button>
+      </ButtonGroup>
+
+      <Row mt={12}>
         {items.map((item, index) => (
-          <OneItemCard
-            buttonShow={!!user}
-            key={item.id}
-            item={item}
-            handleShow={
-            (e, index) => handleShow(index)
-}
-          />
+          <OneItemCard key={item.id} item={item} handleShow={() => handleShow(index)} />
         ))}
-        <ModalWindow show={show} setShow={setShow} item={items[currentIndex]} />
+        { show && <ModalWindow show={show} setShow={setShow} item={items[currentIndex]} />}
       </Row>
     </>
   );

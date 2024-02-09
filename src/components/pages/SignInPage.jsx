@@ -4,7 +4,7 @@ import Navbar from '../ui/Navbar';
 
 function SignInPage({ user }) {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     password: '',
   });
 
@@ -20,28 +20,27 @@ function SignInPage({ user }) {
     e.preventDefault();
     try {
       const response = await axios.post('/signin', formData);
-      console.log('Успешный вход: ', response.data);
+      if (response.status === 200) {
+        window.location.href = '/';
+      }
     } catch (error) {
       console.error('Ошибка при входе: ', error);
     }
   };
 
   return (
-    <>
-      <Navbar user={user} />
-      <div className="container">
-        <h2>Вход</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <input type="text" className="form-control" name="username" value={formData.username} onChange={handleChange} placeholder="Имя пользователя" />
-          </div>
-          <div className="mb-3">
-            <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} placeholder="Пароль" />
-          </div>
-          <button type="submit" className="btn btn-primary">Войти</button>
-        </form>
-      </div>
-    </>
+    <div className="container">
+      <h2>Вход</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <input type="text" className="form-control" name="name" value={formData.username} onChange={handleChange} placeholder="Имя пользователя" />
+        </div>
+        <div className="mb-3">
+          <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} placeholder="Пароль" />
+        </div>
+        <button type="submit" className="btn btn-primary">Войти</button>
+      </form>
+    </div>
   );
 }
 
