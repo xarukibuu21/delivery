@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap/';
 import FormItem from '../ui/FormItem';
 import useItems from '../../hooks/useItems';
+import Navbar from '../ui/Navbar';
 
-export default function ItemPage({ items }) {
+export default function ItemPage({ items, user }) {
   const { itemsState, setItemsState, handleAddItem } = useItems(items);
 
   const handleDelete = async (id) => {
@@ -42,10 +43,10 @@ export default function ItemPage({ items }) {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

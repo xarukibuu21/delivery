@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from '../ui/Navbar';
 
-function SignInPage() {
+function SignInPage({ user }) {
   const [formData, setFormData] = useState({
     name: '',
     password: '',

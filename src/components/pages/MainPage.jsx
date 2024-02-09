@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap/';
 import Row from 'react-bootstrap/Row';
 import OneItemCard from '../ui/OneItemCard';
-import ModalWindow from '../ui/modal';
+import ModalWindow from '../ui/Modal';
+import Navbar from '../ui/Navbar';
 
-export default function MainPage({ items }) {
+export default function MainPage({ items, user }) {
   const [show, setShow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState();
 

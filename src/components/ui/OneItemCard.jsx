@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Card, Col } from 'react-bootstrap/';
 
-export default function OneItemCard({ item, handleShow }) {
+export default function OneItemCard({ item, handleShow, buttonShow }) {
   return (
     <Col xs={12} md={4}>
-      <Card  style={{ margin: '10px 0 0 10px' }}>
+      <Card style={{ margin: '10px 0 0 10px' }}>
         <Card.Img
           variant="top"
           src={item.img}
@@ -21,7 +21,8 @@ export default function OneItemCard({ item, handleShow }) {
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <button type="button" className="btn btn-success" onClick={handleShow}>купиц</button>
+          {buttonShow ? (<button type="button" className="btn btn-success" onClick={handleShow}>Оформить заказ</button>) : ('Чтобы оформить заказ авторизуйтесь')}
+
         </Card.Footer>
       </Card>
     </Col>
