@@ -146,48 +146,47 @@ function ModalWindow({ show, setShow, item }) {
   };
   console.log(item);
   return (
-    <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{item?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Col xs={12} md={4}>
-            <img
-              src={item?.img}
-              alt={item?.title}
-              style={{ height: '250px', objectFit: 'cover', width: '100%' }}
-            />
-            <p>{item?.address}</p>
-            <p>{`Цена без скидки ${item?.price} руб.`}</p>
-            <p>{`Цена со скидкой ${item?.price - (item?.price * (item?.sale / 100))} руб.`}</p>
-          </Col>
-          <div className="input-group input-group-sm mb-3">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              <p>Введите адрес доставки:</p>
-            </span>
-            <input
-              name="address"
-              placeholder="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              type="text"
-              className="form-control"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleBuy}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>{item?.title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Col xs={12} md={4}>
+          <img
+            src={item?.img}
+            alt={item?.title}
+            style={{ height: '250px', objectFit: 'cover', width: '100%' }}
+          />
+          <p>{item?.address}</p>
+          <p>{`Цена без скидки ${item?.price} руб.`}</p>
+          <p>{`Цена со скидкой ${item?.price - (item?.price * (item?.sale / 100))} руб.`}</p>
+        </Col>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text" id="inputGroup-sizing-sm">
+            <p>Введите адрес доставки:</p>
+          </span>
+          <input
+            name="address"
+            placeholder="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            type="text"
+            className="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleBuy}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
