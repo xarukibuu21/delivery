@@ -2,21 +2,31 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Modal, Col } from 'react-bootstrap/';
 
-function ModalWindow({ show, setShow, item }) {
+function ModalWindow({ show, setShow, item}) {
   const [address, setAddress] = useState('');
 
   const handleClose = () => setShow(false);
 
-  const handleBuy = async () => {
-    try {
-      await axios.patch('/order', { address });
-      console.log(address, '<-----------');
-      console.log('Order placed successfully!');
-      handleClose();
-    } catch (error) {
-      console.error('Error placing order:', error);
+  // const handleBuy = async () => {
+  //   try {
+  //     await axios.patch('api/order', { address });
+  //     console.log(address, '<-----------');
+  //     console.log('Order placed successfully!');
+  //     handleClose();
+  //   } catch (error) {
+  //     console.error('Error placing order:', error);
+  //   }
+  // };
+
+  const orderHandler = async() => {
+    try{
+      const response = await axios.post('api/order',  { itemId: item.id })
+      await response.json();
     }
-  };
+   catch (error) {
+    console.error('Error placing order:', error);
+  }
+  }
   console.log(item);
   return (
     <>
@@ -54,7 +64,7 @@ function ModalWindow({ show, setShow, item }) {
           <Button variant="secondary" onClick={handleClose}>
             отмена
           </Button>
-          <Button variant="primary" onClick={handleBuy}>
+          <Button variant="primary" onClick={orderHandler }>
             оформить заказ
           </Button>
         </Modal.Footer>
