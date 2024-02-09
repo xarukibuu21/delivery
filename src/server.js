@@ -10,6 +10,7 @@ import itemRouter from './routes/itemRouter';
 import resLocals from './middlewares/resLocals';
 import apiSignRouter from './routes/apiSignRouter';
 import indexRouter from './routes/indexRouter';
+import itemOrderRouter from './routes/itemOrderRouter';
 
 import apiRouter from './routes/apiRouter';
 
@@ -34,6 +35,7 @@ app.use(resLocals);
 app.use('/items', itemRouter);
 app.use('/api/items', apiItemRouter);
 app.use('/', indexRouter);
+app.use('/', itemOrderRouter);
 
 app.use('/', apiSignRouter);
 
