@@ -9,7 +9,7 @@ export default function MainPage({ items }) {
   const [currentIndex, setCurrentIndex] = useState()
 
 
-  const handleShow = () => {
+  const handleShow = (index) => {
     setShow(true);
     setCurrentIndex(index)
   }
@@ -26,13 +26,13 @@ export default function MainPage({ items }) {
         </Button>
       </ButtonGroup>
 
-      <Row mt={3}>
+      <Row mt={12}>
         {items.map((item, index) => (
           <>
-            <OneItemCard key={item.id} item={item} handleShow={(e, index) => handleShow(index)} />
+            <OneItemCard key={item.id} item={item} handleShow={() => handleShow(index)} />
           </>
         ))}
-        <ModalWindow show={show} setShow={setShow} item={items[currentIndex]} />
+        { show && <ModalWindow show={show} setShow={setShow} item={items[currentIndex]} />}
       </Row>
     </>
   );
