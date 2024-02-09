@@ -14,6 +14,7 @@ apiSignRouter.post('/signup', async (req, res) => {
     const {
       name, email, password, phone, address, isDeliver,
     } = req.body;
+    console.log(req.body);
 
     if (!name || !email || !password || !phone || !address) {
       return res.status(400).json({ message: 'Все поля должны быть заполнены' });
@@ -41,7 +42,7 @@ apiSignRouter.post('/signup', async (req, res) => {
     res
       .cookie('accessToken', accessToken, cookiesConfig.access)
       .cookie('refreshToken', refreshToken, cookiesConfig.refresh)
-      .json({ user });
+      .sendStatus(200);
   } catch (error) {
     console.error(error);
     res.status(500).send('Ошибка сервера');

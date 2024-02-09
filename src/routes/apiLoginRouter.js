@@ -3,14 +3,15 @@ import { User } from '../../db/models';
 import generateTokens from '../utils/generateTokens';
 import cookiesConfig from '../config/cookiesConfig';
 
-const apiSignInRouter = express.Router();
+const apiLoginRouter = express.Router();
 
-apiSignInRouter.get('/signin', (req, res) => {
+apiLoginRouter.get('/signin', (req, res) => {
   res.render('SignInPage');
 });
 
-apiSignInRouter.post('/signin', async (req, res) => {
+apiLoginRouter.post('/signin', async (req, res) => {
   const { name, password } = req.body;
+
   try {
     const user = await User.findOne({ where: { name, password } });
     if (user) {
@@ -22,14 +23,13 @@ apiSignInRouter.post('/signin', async (req, res) => {
         phone: user.phone,
         address: user.address,
       };
-
       const { accessToken, refreshToken } = generateTokens({ user: userData });
       res
         .cookie('accessToken', accessToken, cookiesConfig.access)
         .cookie('refreshToken', refreshToken, cookiesConfig.refresh)
-        .json({ user: userData });
+        .sendStatus(200);
     } else {
-      res.status(401).send('Имя пользователя или пароль неверны');
+      res.status(400).send('Имя пользователя или пароль неверны');
     }
   } catch (error) {
     console.error(error);
@@ -37,4 +37,8 @@ apiSignInRouter.post('/signin', async (req, res) => {
   }
 });
 
-export default apiSignInRouter;
+apiLoginRouter.get('/logout', (req, res) => {
+  res.clearCookie('accessToken').clearCookie('refreshToken').redirect('/');
+});
+
+export default apiLoginRouter;

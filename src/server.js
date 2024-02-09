@@ -10,8 +10,9 @@ import itemRouter from './routes/itemRouter';
 import resLocals from './middlewares/resLocals';
 import apiSignRouter from './routes/apiSignRouter';
 import indexRouter from './routes/indexRouter';
-import apiSignInRouter from './routes/apiSignInRouter';
 import itemOrderRouter from './routes/itemOrderRouter';
+import apiLoginRouter from './routes/apiLoginRouter';
+import checkNoAuth from './middlewares/checkSignIn';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -30,8 +31,8 @@ app.use(resLocals);
 app.use('/items', itemRouter);
 app.use('/api/items', apiItemRouter);
 app.use('/', indexRouter);
-app.use('/', apiSignRouter);
-app.use('/', apiSignInRouter);
 app.use('/', itemOrderRouter);
+app.use('/', checkNoAuth, apiSignRouter);
+app.use('/', checkNoAuth, apiLoginRouter);
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
