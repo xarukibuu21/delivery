@@ -10,7 +10,6 @@ function ModalWindow({ show, setShow, item}) {
   const handleBuy = async () => {
     try {
       await axios.patch('api/order', { address });
-      console.log(address, '<-----------');
       console.log('Order placed successfully!');
       handleClose();
     } catch (error) {
