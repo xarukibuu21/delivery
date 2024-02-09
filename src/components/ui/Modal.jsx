@@ -7,21 +7,21 @@ function ModalWindow({ show, setShow, item}) {
 
   const handleClose = () => setShow(false);
 
-  // const handleBuy = async () => {
-  //   try {
-  //     await axios.patch('api/order', { address });
-  //     console.log(address, '<-----------');
-  //     console.log('Order placed successfully!');
-  //     handleClose();
-  //   } catch (error) {
-  //     console.error('Error placing order:', error);
-  //   }
-  // };
+  const handleBuy = async () => {
+    try {
+      await axios.patch('api/order', { address });
+      console.log(address, '<-----------');
+      console.log('Order placed successfully!');
+      handleClose();
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
+  };
 
   const orderHandler = async() => {
     try{
       const response = await axios.post('api/order',  { itemId: item.id })
-      await response.json();
+      await response.sendStatus(200);
     }
    catch (error) {
     console.error('Error placing order:', error);
@@ -31,6 +31,7 @@ function ModalWindow({ show, setShow, item}) {
   return (
     <>
       <Modal show={show} onHide={handleClose} size="lg">
+        <form onSubmit={handleBuy}>
         <Modal.Header closeButton>
           <Modal.Title>{item?.title}</Modal.Title>
         </Modal.Header>
@@ -64,10 +65,11 @@ function ModalWindow({ show, setShow, item}) {
           <Button variant="secondary" onClick={handleClose}>
             отмена
           </Button>
-          <Button variant="primary" onClick={orderHandler }>
+          <Button variant="primary" type='submit' onClick={orderHandler }>
             оформить заказ
           </Button>
         </Modal.Footer>
+        </form>
       </Modal>
     </>
   );
