@@ -1,5 +1,5 @@
 import express from 'express';
-import { User } from '../../db/models';
+import { User, Order } from '../../db/models';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 
 
-router.patch('/order/:id', async (req, res) => {
+router.patch('/order', async (req, res) => {
   try {
     const { address } = req.body;
     const user = await User.findByPk(req.params.id);
@@ -23,4 +23,15 @@ router.patch('/order/:id', async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+router.post('/order', async(req, res)=>{
+  const {itemId} =req.body;
+  const order = await Order.create({
+    userId: res.locals.user.id,
+    itemId
+  });
+  console.log(order);
+  res.json(order);
+
+})
 export default router;
